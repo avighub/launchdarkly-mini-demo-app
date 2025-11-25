@@ -2,446 +2,433 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LaunchDarkly React Demo</title>
-    <style>
-        :root {
-            --color-primary: #32b8c6;
-            --color-primary-hover: #2da4b2;
-            --color-background: #fcfcf9;
-            --color-surface: #fffffe;
-            --color-text: #13343b;
-            --color-text-secondary: #626c71;
-            --color-border: rgba(94, 82, 64, 0.2);
-            --color-success: #21808d;
-            --color-error: #c0152f;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LaunchDarkly React Demo</title>
+  <style>
+    :root {
+      --color-primary: #32b8c6;
+      --color-primary-hover: #2da4b2;
+      --color-background: #fcfcf9;
+      --color-surface: #fffffe;
+      --color-text: #13343b;
+      --color-text-secondary: #626c71;
+      --color-border: rgba(94, 82, 64, 0.2);
+      --color-success: #21808d;
+      --color-error: #c0152f;
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: var(--color-background);
-            color: var(--color-text);
-            padding: 20px;
-            line-height: 1.6;
-        }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--color-background);
+      color: var(--color-text);
+      padding: 20px;
+      line-height: 1.6;
+    }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
 
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding: 30px;
-            background: var(--color-surface);
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding: 30px;
+      background: var(--color-surface);
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
 
-        .header h1 {
-            color: var(--color-text);
-            margin-bottom: 10px;
-            font-size: 32px;
-        }
+    .header h1 {
+      color: var(--color-text);
+      margin-bottom: 10px;
+      font-size: 32px;
+    }
 
-        .header p {
-            color: var(--color-text-secondary);
-            font-size: 16px;
-        }
+    .header p {
+      color: var(--color-text-secondary);
+      font-size: 16px;
+    }
 
-        .config-section {
-            background: var(--color-surface);
-            padding: 25px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
+    .config-section {
+      background: var(--color-surface);
+      padding: 25px;
+      border-radius: 12px;
+      margin-bottom: 25px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
 
-        .config-section h2 {
-            font-size: 20px;
-            margin-bottom: 15px;
-            color: var(--color-text);
-        }
+    .config-section h2 {
+      font-size: 20px;
+      margin-bottom: 15px;
+      color: var(--color-text);
+    }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
+    .form-group {
+      margin-bottom: 20px;
+    }
 
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            font-size: 14px;
-            color: var(--color-text);
-        }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--color-text);
+    }
 
-        input[type="text"] {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--color-border);
-            border-radius: 8px;
-            font-size: 14px;
-            background: var(--color-background);
-            color: var(--color-text);
-            transition: border-color 0.2s;
-        }
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      font-size: 14px;
+      background: var(--color-background);
+      color: var(--color-text);
+      transition: border-color 0.2s;
+    }
 
-        input[type="text"]:focus {
-            outline: none;
-            border-color: var(--color-primary);
-        }
+    input[type="text"]:focus {
+      outline: none;
+      border-color: var(--color-primary);
+    }
 
-        .btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
+    .btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
 
-        .btn-primary {
-            background: var(--color-primary);
-            color: white;
-        }
+    .btn-primary {
+      background: var(--color-primary);
+      color: white;
+    }
 
-        .btn-primary:hover {
-            background: var(--color-primary-hover);
-        }
+    .btn-primary:hover {
+      background: var(--color-primary-hover);
+    }
 
-        .btn-secondary {
-            background: rgba(94, 82, 64, 0.12);
-            color: var(--color-text);
-        }
+    .btn-secondary {
+      background: rgba(94, 82, 64, 0.12);
+      color: var(--color-text);
+    }
 
-        .btn-secondary:hover {
-            background: rgba(94, 82, 64, 0.2);
-        }
+    .btn-secondary:hover {
+      background: rgba(94, 82, 64, 0.2);
+    }
 
-        .status {
-            display: inline-flex;
-            align-items: center;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 500;
-            margin-left: 10px;
-        }
+    .status {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+      margin-left: 10px;
+    }
 
-        .status.connected {
-            background: rgba(33, 128, 141, 0.15);
-            color: var(--color-success);
-            border: 1px solid rgba(33, 128, 141, 0.25);
-        }
+    .status.connected {
+      background: rgba(33, 128, 141, 0.15);
+      color: var(--color-success);
+      border: 1px solid rgba(33, 128, 141, 0.25);
+    }
 
-        .status.disconnected {
-            background: rgba(192, 21, 47, 0.15);
-            color: var(--color-error);
-            border: 1px solid rgba(192, 21, 47, 0.25);
-        }
+    .status.disconnected {
+      background: rgba(192, 21, 47, 0.15);
+      color: var(--color-error);
+      border: 1px solid rgba(192, 21, 47, 0.25);
+    }
 
-        .demo-section {
-            background: var(--color-surface);
-            padding: 30px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
+    .demo-section {
+      background: var(--color-surface);
+      padding: 30px;
+      border-radius: 12px;
+      margin-bottom: 25px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
 
-        .demo-section h2 {
-            font-size: 20px;
-            margin-bottom: 20px;
-            color: var(--color-text);
-        }
+    .demo-section h2 {
+      font-size: 20px;
+      margin-bottom: 20px;
+      color: var(--color-text);
+    }
 
-        .feature-card {
-            background: var(--color-background);
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            border: 1px solid var(--color-border);
-        }
+    .feature-card {
+      background: var(--color-background);
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      border: 1px solid var(--color-border);
+    }
 
-        .feature-card h3 {
-            font-size: 16px;
-            margin-bottom: 10px;
-            color: var(--color-text);
-        }
+    .feature-card h3 {
+      font-size: 16px;
+      margin-bottom: 10px;
+      color: var(--color-text);
+    }
 
-        .feature-status {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
+    .feature-status {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
 
-        .toggle-indicator {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--color-error);
-        }
+    .toggle-indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--color-error);
+    }
 
-        .toggle-indicator.on {
-            background: var(--color-success);
-        }
+    .toggle-indicator.on {
+      background: var(--color-success);
+    }
 
-        .login-form {
-            max-width: 400px;
-            margin: 0 auto;
-            padding: 30px;
-            background: var(--color-surface);
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
+    .login-form {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 30px;
+      background: var(--color-surface);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
 
-        .login-form h2 {
-            text-align: center;
-            margin-bottom: 25px;
-            color: var(--color-text);
-        }
+    .login-form h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: var(--color-text);
+    }
 
-        .login-form .btn {
-            width: 100%;
-            margin-top: 10px;
-        }
+    .login-form .btn {
+      width: 100%;
+      margin-top: 10px;
+    }
 
-        .demo-buttons {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
+    .demo-buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
 
-        .info-box {
-            background: rgba(50, 184, 198, 0.08);
-            border: 1px solid rgba(50, 184, 198, 0.2);
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
+    .info-box {
+      background: rgba(50, 184, 198, 0.08);
+      border: 1px solid rgba(50, 184, 198, 0.2);
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
 
-        .info-box p {
-            font-size: 14px;
-            color: var(--color-text-secondary);
-            margin-bottom: 8px;
-        }
+    .info-box p {
+      font-size: 14px;
+      color: var(--color-text-secondary);
+      margin-bottom: 8px;
+    }
 
-        .info-box code {
-            background: rgba(0, 0, 0, 0.05);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 13px;
-            font-family: 'Courier New', monospace;
-        }
+    .info-box code {
+      background: rgba(0, 0, 0, 0.05);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-family: 'Courier New', monospace;
+    }
 
-        .hidden {
-            display: none;
-        }
+    .hidden {
+      display: none;
+    }
 
-        .instructions {
-            background: var(--color-surface);
-            padding: 25px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
+    .instructions {
+      background: var(--color-surface);
+      padding: 25px;
+      border-radius: 12px;
+      margin-bottom: 25px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
 
-        .instructions h3 {
-            color: var(--color-text);
-            margin-bottom: 15px;
-            font-size: 18px;
-        }
+    .instructions h3 {
+      color: var(--color-text);
+      margin-bottom: 15px;
+      font-size: 18px;
+    }
 
-        .instructions ol {
-            margin-left: 20px;
-        }
+    .instructions ol {
+      margin-left: 20px;
+    }
 
-        .instructions li {
-            margin-bottom: 10px;
-            color: var(--color-text-secondary);
-        }
-    </style>
+    .instructions li {
+      margin-bottom: 10px;
+      color: var(--color-text-secondary);
+    }
+  </style>
 
-    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>🚀 LaunchDarkly Demo App</h1>
-            <p>Toggle features in real-time with LaunchDarkly feature flags</p>
-        </div>
-
-        <div class="instructions">
-            <h3>Setup Instructions</h3>
-            <ol>
-                <li>Get your <strong>Client-side ID</strong> from LaunchDarkly dashboard (Account Settings → Projects →
-                    Environments)</li>
-                <li>Enter your Client-side ID below and click "Initialize SDK"</li>
-                <li>Create these feature flags in LaunchDarkly:
-                    <ul>
-                        <li><code>show-login-screen</code> (Boolean flag)</li>
-                        <li><code>button-color</code> (String flag with variations: "primary", "secondary")</li>
-                        <li><code>enable-advanced-features</code> (Boolean flag)</li>
-                    </ul>
-                </li>
-                <li>Toggle flags in LaunchDarkly dashboard and watch changes happen instantly!</li>
-            </ol>
-        </div>
-
-        <div class="config-section">
-            <h2>LaunchDarkly Configuration
-                <span id="connectionStatus" class="status disconnected">Disconnected</span>
-            </h2>
-            <div class="form-group">
-                <label for="userKey">User Key (for targeting)</label>
-                <input type="text" id="userKey" placeholder="demo-user-123" value="demo-user-123">
-            </div>
-            <button class="btn btn-primary" onclick="initializeLD()">Initialize SDK</button>
-        </div>
-
-        <div id="demoContent" class="hidden">
-            <div class="demo-section">
-                <h2>Feature Flag Demos</h2>
-
-                <div class="info-box">
-                    <p><strong>💡 How to test:</strong></p>
-                    <p>1. Go to your LaunchDarkly dashboard</p>
-                    <p>2. Toggle the flags on/off</p>
-                    <p>3. Watch the changes happen in real-time below!</p>
-                </div>
-
-                <div class="feature-card">
-                    <h3>Feature 1: Login Screen Toggle</h3>
-                    <div class="feature-status">
-                        <span class="toggle-indicator" id="loginIndicator"></span>
-                        <span>Flag: <code>show-login-screen</code></span>
-                        <span id="loginStatus"></span>
-                    </div>
-                    <div id="loginScreenContent"></div>
-                </div>
-
-                <div class="feature-card">
-                    <h3>Feature 2: Dynamic Button Color</h3>
-                    <div class="feature-status">
-                        <span class="toggle-indicator on"></span>
-                        <span>Flag: <code>button-color</code></span>
-                        <span id="buttonColorStatus"></span>
-                    </div>
-                    <div class="demo-buttons">
-                        <button class="btn" id="dynamicButton1">Action Button</button>
-                        <button class="btn" id="dynamicButton2">Submit</button>
-                        <button class="btn" id="dynamicButton3">Save Changes</button>
-                    </div>
-                </div>
-
-                <div class="feature-card">
-                    <h3>Feature 3: Advanced Features Toggle</h3>
-                    <div class="feature-status">
-                        <span class="toggle-indicator" id="advancedIndicator"></span>
-                        <span>Flag: <code>enable-advanced-features</code></span>
-                        <span id="advancedStatus"></span>
-                    </div>
-                    <div id="advancedContent"></div>
-                </div>
-            </div>
-        </div>
+  <div class="container">
+    <div class="header">
+      <h1>🚀 LaunchDarkly Demo App</h1>
+      <p>Toggle features in real-time with LaunchDarkly feature flags</p>
     </div>
 
-    <script src="config.js"></script>
-    <script src="https://unpkg.com/launchdarkly-js-client-sdk@3"></script>
-    <script>
-        let ldClient = null;
-        let isInitialized = false;
+    <div class="config-section">
+      <h2>LaunchDarkly Configuration
+        <span id="connectionStatus" class="status disconnected">Disconnected</span>
+      </h2>
+      <div class="form-group">
+        <label for="userKey">User Key (for targeting)</label>
+        <input type="text" id="userKey" placeholder="demo-user-123" value="demo-user-123">
+      </div>
+      <button class="btn btn-primary" onclick="initializeLD()">Initialize SDK</button>
+    </div>
 
-        async function initializeLD() {
-            const clientId = window.APP_CONFIG.LAUNCHDARKLY_CLIENT_KEY;
-            const userKey = document.getElementById('userKey').value.trim();
+    <div id="demoContent">
+      <div class="demo-section">
+        <h2>Feature Flag Demos</h2>
 
-            if (!clientId) {
-                alert('Please enter your LaunchDarkly Client-side ID');
-                return;
-            }
+        <div class="info-box">
+          <p><strong>⚠️ Demo Status:</strong> <span id="demoStatus">Not connected - Click "Initialize SDK" above</span>
+          </p>
+        </div>
 
-            try {
-                // Initialize LaunchDarkly client
-                const user = {
-                    key: userKey,
-                    name: 'Demo User',
-                    email: 'demo@example.com'
-                };
+        <div class="feature-card">
+          <h3>Feature 1: Login Screen Toggle</h3>
+          <div class="feature-status">
+            <span class="toggle-indicator" id="loginIndicator"></span>
+            <span>Flag: <code>show-login-screen</code></span>
+            <span id="loginStatus"></span>
+          </div>
+          <div id="loginScreenContent"></div>
+        </div>
 
-                ldClient = window.LDClient.initialize(clientId, user);
+        <div class="feature-card">
+          <h3>Feature 2: Dynamic Button Color</h3>
+          <div class="feature-status">
+            <span class="toggle-indicator on"></span>
+            <span>Flag: <code>button-color</code></span>
+            <span id="buttonColorStatus"></span>
+          </div>
+          <div class="demo-buttons">
+            <button class="btn" id="dynamicButton1">Action Button</button>
+            <button class="btn" id="dynamicButton2">Submit</button>
+            <button class="btn" id="dynamicButton3">Save Changes</button>
+          </div>
+        </div>
 
-                // Wait for initialization
-                await ldClient.waitForInitialization();
+        <div class="feature-card">
+          <h3>Feature 3: Advanced Features Toggle</h3>
+          <div class="feature-status">
+            <span class="toggle-indicator" id="advancedIndicator"></span>
+            <span>Flag: <code>enable-advanced-features</code></span>
+            <span id="advancedStatus"></span>
+          </div>
+          <div id="advancedContent"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-                isInitialized = true;
-                updateConnectionStatus(true);
-                document.getElementById('demoContent').classList.remove('hidden');
+  <script src="https://unpkg.com/launchdarkly-js-client-sdk@3"></script>
+  <script type="module" src="env-loader.js"></script>
+  <script type="module">
+    let ldClient = null;
+    let isInitialized = false;
 
-                // Set up change listeners
-                ldClient.on('change', (flags) => {
-                    updateFeatures();
-                });
+    async function initializeLD() {
+      // Get client ID from environment or prompt user
+      const clientId = window.getLaunchDarklyKey ? window.getLaunchDarklyKey() :
+        prompt('Please enter your LaunchDarkly Client-side ID:');
 
-                // Initial feature update
-                updateFeatures();
+      const userKey = document.getElementById('userKey').value.trim();
 
-                alert('✅ Successfully connected to LaunchDarkly!');
-            } catch (error) {
-                console.error('LaunchDarkly initialization error:', error);
-                alert('❌ Failed to initialize LaunchDarkly. Please check your Client-side ID and try again.');
-                updateConnectionStatus(false);
-            }
-        }
+      if (!clientId || clientId.trim() === '') {
+        alert('❌ LaunchDarkly Client-side ID is required');
+        return;
+      }
 
-        function updateConnectionStatus(connected) {
-            const statusEl = document.getElementById('connectionStatus');
-            if (connected) {
-                statusEl.textContent = 'Connected';
-                statusEl.className = 'status connected';
-            } else {
-                statusEl.textContent = 'Disconnected';
-                statusEl.className = 'status disconnected';
-            }
-        }
+      try {
+        // Initialize LaunchDarkly client
+        const user = {
+          key: userKey,
+          name: 'Demo User',
+          email: 'demo@example.com'
+        };
 
-        function updateFeatures() {
-            if (!ldClient || !isInitialized) return;
+        ldClient = window.LDClient.initialize(clientId, user);
 
-            // Feature 1: Login Screen
-            const showLogin = ldClient.variation('show-login-screen', false);
-            updateLoginScreen(showLogin);
+        // Wait for initialization
+        await ldClient.waitForInitialization();
 
-            // Feature 2: Button Color
-            const buttonColor = ldClient.variation('button-color', 'primary');
-            updateButtonColors(buttonColor);
+        isInitialized = true;
+        updateConnectionStatus(true);
+        document.getElementById('demoStatus').innerHTML = '✅ Connected! Toggle flags in LaunchDarkly dashboard to see changes below.';
 
-            // Feature 3: Advanced Features
-            const enableAdvanced = ldClient.variation('enable-advanced-features', false);
-            updateAdvancedFeatures(enableAdvanced);
-        }
+        // Set up change listeners
+        ldClient.on('change', (flags) => {
+          updateFeatures();
+        });
 
-        function updateLoginScreen(enabled) {
-            const indicator = document.getElementById('loginIndicator');
-            const status = document.getElementById('loginStatus');
-            const content = document.getElementById('loginScreenContent');
+        // Initial feature update
+        updateFeatures();
 
-            indicator.className = enabled ? 'toggle-indicator on' : 'toggle-indicator';
-            status.textContent = enabled ? '(Enabled)' : '(Disabled)';
+        alert('✅ Successfully connected to LaunchDarkly!');
+      } catch (error) {
+        console.error('LaunchDarkly initialization error:', error);
+        alert('❌ Failed to initialize LaunchDarkly. Please check your Client-side ID and try again.');
+        updateConnectionStatus(false);
+      }
+    }
 
-            if (enabled) {
-                content.innerHTML = `
+    // Make function accessible globally
+    window.initializeLD = initializeLD;
+
+    function updateConnectionStatus(connected) {
+      const statusEl = document.getElementById('connectionStatus');
+      if (connected) {
+        statusEl.textContent = 'Connected';
+        statusEl.className = 'status connected';
+      } else {
+        statusEl.textContent = 'Disconnected';
+        statusEl.className = 'status disconnected';
+      }
+    }
+
+    function updateFeatures() {
+      if (!ldClient || !isInitialized) return;
+
+      // Feature 1: Login Screen
+      const showLogin = ldClient.variation('show-login-screen', false);
+      updateLoginScreen(showLogin);
+
+      // Feature 2: Button Color
+      const buttonColor = ldClient.variation('button-color', 'primary');
+      updateButtonColors(buttonColor);
+
+      // Feature 3: Advanced Features
+      const enableAdvanced = ldClient.variation('enable-advanced-features', false);
+      updateAdvancedFeatures(enableAdvanced);
+    }
+
+    function updateLoginScreen(enabled) {
+      const indicator = document.getElementById('loginIndicator');
+      const status = document.getElementById('loginStatus');
+      const content = document.getElementById('loginScreenContent');
+
+      indicator.className = enabled ? 'toggle-indicator on' : 'toggle-indicator';
+      status.textContent = enabled ? '(Enabled)' : '(Disabled)';
+
+      if (enabled) {
+        content.innerHTML = `
                     <div class="login-form">
                         <h2>Login</h2>
                         <div class="form-group">
@@ -455,41 +442,41 @@
                         <button class="btn btn-primary">Sign In</button>
                     </div>
                 `;
-            } else {
-                content.innerHTML = '<p style="color: var(--color-text-secondary); font-style: italic;">Login screen is hidden (toggle flag to show)</p>';
-            }
+      } else {
+        content.innerHTML = '<p style="color: var(--color-text-secondary); font-style: italic;">Login screen is hidden (toggle flag to show)</p>';
+      }
+    }
+
+    function updateButtonColors(color) {
+      const status = document.getElementById('buttonColorStatus');
+      const buttons = [
+        document.getElementById('dynamicButton1'),
+        document.getElementById('dynamicButton2'),
+        document.getElementById('dynamicButton3')
+      ];
+
+      status.textContent = `(Current: ${color})`;
+
+      buttons.forEach(btn => {
+        btn.className = 'btn';
+        if (color === 'primary') {
+          btn.classList.add('btn-primary');
+        } else {
+          btn.classList.add('btn-secondary');
         }
+      });
+    }
 
-        function updateButtonColors(color) {
-            const status = document.getElementById('buttonColorStatus');
-            const buttons = [
-                document.getElementById('dynamicButton1'),
-                document.getElementById('dynamicButton2'),
-                document.getElementById('dynamicButton3')
-            ];
+    function updateAdvancedFeatures(enabled) {
+      const indicator = document.getElementById('advancedIndicator');
+      const status = document.getElementById('advancedStatus');
+      const content = document.getElementById('advancedContent');
 
-            status.textContent = `(Current: ${color})`;
+      indicator.className = enabled ? 'toggle-indicator on' : 'toggle-indicator';
+      status.textContent = enabled ? '(Enabled)' : '(Disabled)';
 
-            buttons.forEach(btn => {
-                btn.className = 'btn';
-                if (color === 'primary') {
-                    btn.classList.add('btn-primary');
-                } else {
-                    btn.classList.add('btn-secondary');
-                }
-            });
-        }
-
-        function updateAdvancedFeatures(enabled) {
-            const indicator = document.getElementById('advancedIndicator');
-            const status = document.getElementById('advancedStatus');
-            const content = document.getElementById('advancedContent');
-
-            indicator.className = enabled ? 'toggle-indicator on' : 'toggle-indicator';
-            status.textContent = enabled ? '(Enabled)' : '(Disabled)';
-
-            if (enabled) {
-                content.innerHTML = `
+      if (enabled) {
+        content.innerHTML = `
                     <div style="padding: 15px; background: rgba(50, 184, 198, 0.08); border-radius: 8px;">
                         <h4 style="margin-bottom: 10px; color: var(--color-text);">🎉 Advanced Features Unlocked!</h4>
                         <ul style="margin-left: 20px; color: var(--color-text-secondary);">
@@ -500,11 +487,11 @@
                         </ul>
                     </div>
                 `;
-            } else {
-                content.innerHTML = '<p style="color: var(--color-text-secondary); font-style: italic;">Advanced features are locked (toggle flag to unlock)</p>';
-            }
-        }
-    </script>
+      } else {
+        content.innerHTML = '<p style="color: var(--color-text-secondary); font-style: italic;">Advanced features are locked (toggle flag to unlock)</p>';
+      }
+    }
+  </script>
 </body>
 
 </html>
