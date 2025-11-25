@@ -269,7 +269,6 @@
             margin-bottom: 10px;
             color: var(--color-text-secondary);
         }
-        
     </style>
 
     <link rel="stylesheet" href="style.css">
@@ -303,10 +302,6 @@
             <h2>LaunchDarkly Configuration
                 <span id="connectionStatus" class="status disconnected">Disconnected</span>
             </h2>
-            <div class="form-group">
-                <label for="clientId">Client-side ID</label>
-                <input type="password" id="clientId" placeholder="Enter your LaunchDarkly client-side ID" value="">
-            </div>
             <div class="form-group">
                 <label for="userKey">User Key (for targeting)</label>
                 <input type="text" id="userKey" placeholder="demo-user-123" value="demo-user-123">
@@ -362,14 +357,14 @@
         </div>
     </div>
 
+    <script src="config.js"></script>
     <script src="https://unpkg.com/launchdarkly-js-client-sdk@3"></script>
     <script>
         let ldClient = null;
         let isInitialized = false;
 
         async function initializeLD() {
-            const maskedClientId = '********';
-            const clientId = document.getElementById('clientId').value.trim();
+            const clientId = window.APP_CONFIG.LAUNCHDARKLY_CLIENT_KEY;
             const userKey = document.getElementById('userKey').value.trim();
 
             if (!clientId) {
